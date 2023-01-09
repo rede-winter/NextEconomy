@@ -23,8 +23,6 @@ public class RankingHologram {
 
         clear();
 
-        System.out.println(System.currentTimeMillis() + " - ATUALIZADO");
-
         final Location location = locations.getLocation(1);
         if (location == null) return;
 
