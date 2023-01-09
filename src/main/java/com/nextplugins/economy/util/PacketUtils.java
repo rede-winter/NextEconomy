@@ -9,15 +9,18 @@ import org.bukkit.entity.Player;
  * @author Yuhtin
  * Github: https://github.com/Yuhtin
  */
-
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PacketUtils {
 
     public static void sendPacket(Player player, Object packet) {
         try {
             Object handle = player.getClass().getMethod("getHandle").invoke(player);
-            Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
-            playerConnection.getClass().getMethod("sendPacket", getNMSClass("Packet")).invoke(playerConnection, packet);
+            Object playerConnection =
+                    handle.getClass().getField("playerConnection").get(handle);
+            playerConnection
+                    .getClass()
+                    .getMethod("sendPacket", getNMSClass("Packet"))
+                    .invoke(playerConnection, packet);
         } catch (Exception e) {
         }
     }
@@ -31,5 +34,4 @@ public class PacketUtils {
             return null;
         }
     }
-
 }

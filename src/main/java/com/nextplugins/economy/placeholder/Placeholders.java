@@ -6,7 +6,5 @@ public final class Placeholders {
 
     public static void register() {
         new EconomyPlaceholder().register();
-        new StockExchangePlaceholder().register();
     }
-
 }

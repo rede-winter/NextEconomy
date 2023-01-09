@@ -27,27 +27,20 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
-
     compileOnly 'com.github.PlaceholderAPI:PlaceholderAPI:2.10.9'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
     compileOnly 'com.nickuc.chat:nchat-api:4.2'
-    compileOnly fileTree('libs')
 
-    implementation 'com.github.NextPlugins.npc-ranking:core:master-SNAPSHOT'
-    implementation 'com.github.NextPlugins:hologram-wrapper:master-SNAPSHOT'
-    implementation 'com.github.eikefab.plugin-updater:bukkit:master-SNAPSHOT'
+    implementation fileTree('libs')
     implementation 'com.github.HenryFabio.configuration-injector:bukkit:1.0.2'
     implementation 'com.github.HenryFabio:inventory-api:main-SNAPSHOT'
     implementation 'com.github.HenryFabio:sql-provider:9561f20fd2'
-
     implementation 'com.github.SaiintBrisson.command-framework:bukkit:1.2.0'
     implementation 'de.tr7zw:item-nbt-api:2.10.0'
-
-    implementation 'com.github.ben-manes.caffeine:caffeine:2.9.0' // 3.0.0 or higher is for java 11+
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.1.2' // 3.0.0 or higher is for java 11+
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     def lombok = 'org.projectlombok:lombok:1.18.24'
-
     compileOnly lombok
     annotationProcessor lombok
 }
@@ -59,16 +52,15 @@ bukkit {
     version = "${project.version}"
     depend = ['Vault']
     apiVersion = '1.13'
-    load = 'STARTUP'
     softDepend = [
             'ProtocolLib',
-            'SkinsRestorer',
             'HolographicDisplays',
+            'DecentHolograms',
+            'SkinsRestorer',
             'PlaceholderAPI',
             'Legendchat',
             'UltimateChat',
-            'nChat',
-            'DiscordSRV'
+            'nChat'
     ]
 }
 
@@ -102,6 +94,8 @@ build {
 compileJava {
     options.encoding('UTF-8')
 
-    sourceCompatibility('1.8')
-    targetCompatibility('1.8')
+    sourceCompatibility('11')
+    targetCompatibility('11')
 }
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11

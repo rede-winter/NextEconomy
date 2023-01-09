@@ -67,10 +67,8 @@ public final class EventAwaiter<E extends Event> {
         return this;
     }
 
-
     public void await(boolean async) {
         this.register(event -> {
-
             if (!clazz.isInstance(event)) return;
 
             E castedEvent = clazz.cast(event);
@@ -82,29 +80,20 @@ public final class EventAwaiter<E extends Event> {
             this.timeoutRunnable = null;
             this.unregister();
             finished.set(true);
-
         });
-
 
         if (!async) Bukkit.getScheduler().runTaskLater(plugin, this::unregister, 20 * expiringTime);
         else Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, this::unregister, 20 * expiringTime);
-
     }
 
     private void register(Consumer<Event> consumer) {
 
         this.listener = new RegisteredListener(
-                new EmptyListener(),
-                (listener, event) -> consumer.accept(event),
-                EventPriority.HIGH,
-                plugin,
-                false
-        );
+                new EmptyListener(), (listener, event) -> consumer.accept(event), EventPriority.HIGH, plugin, false);
 
         for (HandlerList handlerList : HandlerList.getHandlerLists()) {
             handlerList.register(listener);
         }
-
     }
 
     private void unregister() {
@@ -116,10 +105,8 @@ public final class EventAwaiter<E extends Event> {
         for (HandlerList handlerList : HandlerList.getHandlerLists()) {
             handlerList.unregister(listener);
         }
-
     }
 
     // Tag class
-    class EmptyListener implements Listener {
-    }
+    class EmptyListener implements Listener {}
 }

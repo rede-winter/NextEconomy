@@ -13,5 +13,4 @@ public final class BackupResponse {
 
     private final @Nullable File file;
     private final @NotNull ResponseType responseType;
-
 }

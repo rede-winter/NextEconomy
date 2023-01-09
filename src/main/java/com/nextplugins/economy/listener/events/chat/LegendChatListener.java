@@ -1,7 +1,6 @@
 package com.nextplugins.economy.listener.events.chat;
 
 import br.com.devpaulo.legendchat.api.events.ChatMessageEvent;
-import com.nextplugins.economy.model.interactions.registry.InteractionRegistry;
 import com.nextplugins.economy.ranking.RankingStorage;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -13,23 +12,12 @@ import org.bukkit.event.Listener;
 public final class LegendChatListener implements Listener {
 
     private final RankingStorage rankingStorage;
-    private final InteractionRegistry interactionRegistry;
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerChat(ChatMessageEvent event) {
         if (event.isCancelled()) return;
 
         val player = event.getSender();
-        if (interactionRegistry.getOperation().contains(player.getName())) {
-
-            interactionRegistry.getOperation().remove(player.getName());
-
-            event.setCancelled(true);
-            return;
-
-        }
-
         event.setTagValue("tycoon", rankingStorage.getTycoonTag(player.getName()));
     }
-
 }

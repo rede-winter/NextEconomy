@@ -29,5 +29,4 @@ public class Group {
         if (!coloredSuffix.startsWith(" ")) this.suffix = " " + coloredSuffix;
         else this.suffix = coloredSuffix;
     }
-
 }

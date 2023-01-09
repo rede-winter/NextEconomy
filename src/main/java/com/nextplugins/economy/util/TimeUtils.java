@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum TimeUtils {
-
     DAY(86400000, "days", "day", "d", "dia", "dias"),
     HOUR(3600000, "hours", "hour", "h", "hora", "horas"),
     MINUTE(60000, "minutes", "minute", "m", "minuto", "minutos"),

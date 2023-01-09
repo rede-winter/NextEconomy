@@ -3,9 +3,8 @@ package com.nextplugins.economy.api;
 import com.google.common.collect.Sets;
 import com.nextplugins.economy.NextEconomy;
 import com.nextplugins.economy.dao.repository.AccountRepository;
-import com.nextplugins.economy.model.account.Account;
-import com.nextplugins.economy.model.account.SimpleAccount;
-import com.nextplugins.economy.model.account.storage.AccountStorage;
+import com.nextplugins.economy.model.Account;
+import com.nextplugins.economy.model.storage.AccountStorage;
 import com.nextplugins.economy.ranking.RankingStorage;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -29,7 +28,8 @@ public final class NextEconomyAPI {
     @Getter
     private static final NextEconomyAPI instance = new NextEconomyAPI();
 
-    private final AccountRepository accountRepository = NextEconomy.getInstance().getAccountRepository();
+    private final AccountRepository accountRepository =
+            NextEconomy.getInstance().getAccountRepository();
     private final RankingStorage rankingStorage = NextEconomy.getInstance().getRankingStorage();
     private final AccountStorage accountStorage = NextEconomy.getInstance().getAccountStorage();
 
@@ -82,8 +82,7 @@ public final class NextEconomyAPI {
      * @return {@link Collection} with accounts
      * @deprecated Use {@link NextEconomyAPI#retrieveCachedAccountsAsync()}
      */
-    public @Deprecated
-    @NotNull Collection<Account> retrieveCachedAccountsSync() {
+    public @Deprecated @NotNull Collection<Account> retrieveCachedAccountsSync() {
         return accountStorage.getCache().synchronous().asMap().values();
     }
 
@@ -94,18 +93,15 @@ public final class NextEconomyAPI {
      * @return {@link Stream} aplicated with filter
      * @deprecated Since 2.0.0
      */
-    public @Deprecated
-    @NotNull Stream<Account> findAccountByFilter(@NotNull Predicate<Account> filter) {
+    public @Deprecated @NotNull Stream<Account> findAccountByFilter(@NotNull Predicate<Account> filter) {
         return retrieveCachedAccountsAsync().stream()
                 .map(future -> {
-
                     try {
                         return future.get();
                     } catch (InterruptedException | ExecutionException exception) {
                         Thread.currentThread().interrupt();
                         return null;
                     }
-
                 })
                 .filter(filter);
     }
@@ -116,8 +112,7 @@ public final class NextEconomyAPI {
      * @return {@link Set} with accounts
      * @deprecated Since 2.0.0
      */
-    public @Deprecated
-    @NotNull Set<CompletableFuture<Account>> allAccounts() {
+    public @Deprecated @NotNull Set<CompletableFuture<Account>> allAccounts() {
         return Sets.newHashSet(retrieveCachedAccountsAsync());
     }
 
@@ -127,8 +122,7 @@ public final class NextEconomyAPI {
      * @param movimentationRanking if true, will get the player with the largest amount of money moved, instead of the richest
      * @return player's account
      */
-    public @Nullable SimpleAccount getTopPlayer(boolean movimentationRanking) {
-        return rankingStorage.getTopPlayer(movimentationRanking);
+    public @Nullable Account getTopPlayer() {
+        return rankingStorage.getTopPlayer();
     }
-
 }

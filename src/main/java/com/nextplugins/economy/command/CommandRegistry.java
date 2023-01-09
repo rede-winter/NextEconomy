@@ -1,13 +1,8 @@
 package com.nextplugins.economy.command;
 
 import com.nextplugins.economy.NextEconomy;
-import com.nextplugins.economy.command.CheckCommand;
-import com.nextplugins.economy.command.MoneyCommand;
-import com.nextplugins.economy.command.NextEconomyCommand;
-import com.nextplugins.economy.command.StockExchangeCommand;
 import com.nextplugins.economy.configuration.FeatureValue;
 import com.nextplugins.economy.configuration.MessageValue;
-import com.nextplugins.economy.configuration.StockExchangeValue;
 import lombok.Data;
 import me.saiintbrisson.bukkit.command.BukkitFrame;
 import me.saiintbrisson.minecraft.command.message.MessageHolder;
@@ -23,28 +18,12 @@ public final class CommandRegistry {
             BukkitFrame bukkitFrame = new BukkitFrame(plugin);
 
             bukkitFrame.registerCommands(
-                    new MoneyCommand(
-                            plugin,
-                            plugin.getAccountStorage()
-                    ),
+                    new MoneyCommand(plugin, plugin.getAccountStorage(), plugin.getRankingBootstrap()),
                     new NextEconomyCommand(
-                            plugin.getBackupManager(),
-                            plugin.getRankingStorage(),
-                            plugin.getAccountStorage(),
-                            plugin.getConvertorManager()
-                    )
-            );
+                            plugin.getBackupManager(), plugin.getRankingStorage(), plugin.getAccountStorage()));
 
             if (FeatureValue.get(FeatureValue::checkSystemEnabled)) {
-                bukkitFrame.registerCommands(
-                        new CheckCommand(plugin.getAccountStorage())
-                );
-            }
-
-            if (StockExchangeValue.get(StockExchangeValue::enable)) {
-                bukkitFrame.registerCommands(
-                        new StockExchangeCommand()
-                );
+                bukkitFrame.registerCommands(new CheckCommand(plugin.getAccountStorage()));
             }
 
             MessageHolder messageHolder = bukkitFrame.getMessageHolder();
@@ -60,5 +39,4 @@ public final class CommandRegistry {
             plugin.getLogger().severe("Não foi possível registrar os comandos.");
         }
     }
-
 }

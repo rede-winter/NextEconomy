@@ -1,14 +1,13 @@
 package com.nextplugins.economy.listener.events.check;
 
 import com.nextplugins.economy.configuration.MessageValue;
-import com.nextplugins.economy.model.account.storage.AccountStorage;
-import com.nextplugins.economy.model.account.transaction.Transaction;
-import com.nextplugins.economy.model.account.transaction.TransactionType;
+import com.nextplugins.economy.model.storage.AccountStorage;
+import com.nextplugins.economy.model.transaction.Transaction;
+import com.nextplugins.economy.model.transaction.TransactionType;
 import com.nextplugins.economy.util.NumberUtils;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import lombok.var;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,8 +25,7 @@ public final class CheckInteractListener implements Listener {
         val player = event.getPlayer();
 
         val item = player.getItemInHand();
-        if (event.getAction() != Action.RIGHT_CLICK_AIR
-                && event.getAction() != Action.RIGHT_CLICK_BLOCK
+        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK
                 || item.getType() == Material.AIR) return;
 
         val checkField = "value";
@@ -57,25 +55,20 @@ public final class CheckInteractListener implements Listener {
 
         val account = accountStorage.findAccount(player);
 
-        val response = account.createTransaction(
-                Transaction.builder()
-                        .player(player)
-                        .owner("Cheque")
-                        .amount(value)
-                        .transactionType(TransactionType.DEPOSIT)
-                        .build()
-        );
+        val response = account.createTransaction(Transaction.builder()
+                .player(player)
+                .owner("Cheque")
+                .amount(value)
+                .transactionType(TransactionType.DEPOSIT)
+                .build());
 
         if (!response.transactionSuccess()) {
             player.sendMessage(MessageValue.get(MessageValue::invalidMoney));
             return;
         }
 
-        player.sendMessage(
-                MessageValue.get(MessageValue::checkUsed)
-                        .replace("$checkAmount", NumberUtils.format(item.getAmount()))
-                        .replace("$checkTotalValue", NumberUtils.format(value))
-        );
+        player.sendMessage(MessageValue.get(MessageValue::checkUsed)
+                .replace("$checkAmount", NumberUtils.format(item.getAmount()))
+                .replace("$checkTotalValue", NumberUtils.format(value)));
     }
-
 }

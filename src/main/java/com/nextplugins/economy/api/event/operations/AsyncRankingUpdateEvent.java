@@ -21,5 +21,4 @@ public final class AsyncRankingUpdateEvent extends EconomyEvent implements Cance
     public AsyncRankingUpdateEvent() {
         super(true);
     }
-
 }

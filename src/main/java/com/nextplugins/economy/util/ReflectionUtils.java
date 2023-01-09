@@ -58,8 +58,8 @@ public final class ReflectionUtils {
      * <p>
      * Performance is not a concern for these specific statically initialized values.
      */
-    public static final String
-            VERSION = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+    public static final String VERSION =
+            Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
     /**
      * The raw minor version number.
      * E.g. {@code v1_17_R1} to {@code 17}
@@ -70,8 +70,7 @@ public final class ReflectionUtils {
     /**
      * Mojang remapped their NMS in 1.17 https://www.spigotmc.org/threads/spigot-bungeecord-1-17.510208/#post-4184317
      */
-    public static final String
-            CRAFTBUKKIT = "org.bukkit.craftbukkit." + VERSION + '.',
+    public static final String CRAFTBUKKIT = "org.bukkit.craftbukkit." + VERSION + '.',
             NMS = supports(17) ? "net.minecraft." : "net.minecraft.server." + VERSION + '.';
     /**
      * A nullable public accessible field only available in {@code EntityPlayer}.
@@ -104,7 +103,10 @@ public final class ReflectionUtils {
         try {
             connection = lookup.findGetter(entityPlayer, supports(17) ? "b" : "playerConnection", playerConnection);
             getHandle = lookup.findVirtual(craftPlayer, "getHandle", MethodType.methodType(entityPlayer));
-            sendPacket = lookup.findVirtual(playerConnection, "sendPacket", MethodType.methodType(void.class, getNMSClass("network.protocol", "Packet")));
+            sendPacket = lookup.findVirtual(
+                    playerConnection,
+                    "sendPacket",
+                    MethodType.methodType(void.class, getNMSClass("network.protocol", "Packet")));
         } catch (NoSuchMethodException | NoSuchFieldException | IllegalAccessException ex) {
             ex.printStackTrace();
         }
@@ -124,7 +126,9 @@ public final class ReflectionUtils {
      * @return true if the version is equal or newer, otherwise false.
      * @since 4.0.0
      */
-    public static boolean supports(int version) { return VER >= version; }
+    public static boolean supports(int version) {
+        return VER >= version;
+    }
 
     /**
      * Get a NMS (net.minecraft.server) class which accepts a package for 1.17 compatibility.
@@ -172,11 +176,10 @@ public final class ReflectionUtils {
      */
     @Nonnull
     public static CompletableFuture<Void> sendPacket(@Nonnull Player player, @Nonnull Object... packets) {
-        return CompletableFuture.runAsync(() -> sendPacketSync(player, packets))
-                .exceptionally(ex -> {
-                    ex.printStackTrace();
-                    return null;
-                });
+        return CompletableFuture.runAsync(() -> sendPacketSync(player, packets)).exceptionally(ex -> {
+            ex.printStackTrace();
+            return null;
+        });
     }
 
     /**
@@ -219,5 +222,4 @@ public final class ReflectionUtils {
             return null;
         }
     }
-
 }

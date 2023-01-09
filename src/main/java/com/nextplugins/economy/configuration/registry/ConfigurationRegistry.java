@@ -2,7 +2,9 @@ package com.nextplugins.economy.configuration.registry;
 
 import com.henryfabio.minecraft.configinjector.bukkit.injector.BukkitConfigurationInjector;
 import com.nextplugins.economy.NextEconomy;
-import com.nextplugins.economy.configuration.*;
+import com.nextplugins.economy.configuration.FeatureValue;
+import com.nextplugins.economy.configuration.MessageValue;
+import com.nextplugins.economy.configuration.RankingValue;
 import lombok.Data;
 
 @Data(staticConstructor = "of")
@@ -13,25 +15,11 @@ public final class ConfigurationRegistry {
     public void register() {
         BukkitConfigurationInjector configurationInjector = new BukkitConfigurationInjector(plugin);
 
-        configurationInjector.saveDefaultConfiguration(
-            plugin,
-            "messages.yml",
-            "ranking.yml",
-            "inventories.yml",
-            "discord.yml"
-        );
+        configurationInjector.saveDefaultConfiguration(plugin, "messages.yml", "ranking.yml");
 
         configurationInjector.injectConfiguration(
-            FeatureValue.instance(),
-            DiscordValue.instance(),
-            MessageValue.instance(),
-            RankingValue.instance(),
-            InventoryValue.instance(),
-            StockExchangeValue.instance(),
-            AnimationValue.instance()
-        );
+                FeatureValue.instance(), MessageValue.instance(), RankingValue.instance());
 
         getPlugin().getLogger().info("Configurações registradas e injetadas com sucesso.");
     }
-
 }

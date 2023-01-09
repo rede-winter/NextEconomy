@@ -11,5 +11,4 @@ public final class DateFormatUtil {
         Date date = new Date(milli);
         return DATE_FORMAT.format(date).replace(" ", " às ");
     }
-
 }

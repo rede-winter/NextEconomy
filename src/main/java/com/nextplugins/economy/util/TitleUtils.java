@@ -38,5 +38,4 @@ public class TitleUtils {
             PacketUtils.sendPacket(player, packet);
         }
     }
-
 }

@@ -1,8 +1,8 @@
 package com.nextplugins.economy.placeholder;
 
 import com.nextplugins.economy.NextEconomy;
-import com.nextplugins.economy.model.account.Account;
-import com.nextplugins.economy.model.account.storage.AccountStorage;
+import com.nextplugins.economy.model.Account;
+import com.nextplugins.economy.model.storage.AccountStorage;
 import com.nextplugins.economy.ranking.RankingStorage;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
@@ -12,7 +12,6 @@ class EconomyPlaceholder extends PlaceholderExpansion {
 
     private final NextEconomy plugin;
     private final AccountStorage accountStorage;
-
 
     public EconomyPlaceholder() {
         this.plugin = NextEconomy.getInstance();
@@ -51,10 +50,9 @@ class EconomyPlaceholder extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("tycoon")) {
             return rankingStorage.getTycoonTag(player.getName());
         } else if (params.equalsIgnoreCase("tycoon_name")) {
-            return rankingStorage.getTopPlayer();
+            return rankingStorage.getTopPlayer().getUsername();
         }
 
         return "Placeholder inválida";
     }
-
 }

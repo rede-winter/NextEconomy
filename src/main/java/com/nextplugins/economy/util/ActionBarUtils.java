@@ -99,8 +99,7 @@ public final class ActionBarUtils {
             try {
                 // Game Info Message Type
                 Class<?> chatMessageTypeClass = Class.forName(
-                        ReflectionUtils.NMS + (ReflectionUtils.supports(17) ? "network.chat" : "") + "ChatMessageType"
-                );
+                        ReflectionUtils.NMS + (ReflectionUtils.supports(17) ? "network.chat" : "") + "ChatMessageType");
 
                 // Packet Constructor
                 MethodType type = MethodType.methodType(void.class, iChatBaseComponentClass, chatMessageTypeClass);
@@ -115,7 +114,8 @@ public final class ActionBarUtils {
 
                 // JSON Message Builder
                 Class<?> chatComponentTextClass = ReflectionUtils.getNMSClass("network.chat", "ChatComponentText");
-                chatComp = lookup.findConstructor(chatComponentTextClass, MethodType.methodType(void.class, String.class));
+                chatComp =
+                        lookup.findConstructor(chatComponentTextClass, MethodType.methodType(void.class, String.class));
 
                 packet = lookup.findConstructor(packetPlayOutChatClass, type);
             } catch (NoSuchMethodException | IllegalAccessException | ClassNotFoundException ignored) {
@@ -125,10 +125,13 @@ public final class ActionBarUtils {
 
                     // JSON Message Builder
                     Class<?> chatComponentTextClass = ReflectionUtils.getNMSClass("ChatComponentText");
-                    chatComp = lookup.findConstructor(chatComponentTextClass, MethodType.methodType(void.class, String.class));
+                    chatComp = lookup.findConstructor(
+                            chatComponentTextClass, MethodType.methodType(void.class, String.class));
 
                     // Packet Constructor
-                    packet = lookup.findConstructor(packetPlayOutChatClass, MethodType.methodType(void.class, iChatBaseComponentClass, byte.class));
+                    packet = lookup.findConstructor(
+                            packetPlayOutChatClass,
+                            MethodType.methodType(void.class, iChatBaseComponentClass, byte.class));
                 } catch (NoSuchMethodException | IllegalAccessException ex) {
                     ex.printStackTrace();
                 }
@@ -140,7 +143,7 @@ public final class ActionBarUtils {
         PACKET_PLAY_OUT_CHAT = packet;
     }
 
-    private ActionBarUtils() { }
+    private ActionBarUtils() {}
 
     /**
      * Sends an action bar to a player.

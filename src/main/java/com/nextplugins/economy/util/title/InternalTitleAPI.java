@@ -13,5 +13,4 @@ public interface InternalTitleAPI {
     default void clearTitle(Player player) {
         sendTitle(player, "", 0, 0, 0);
     }
-
 }

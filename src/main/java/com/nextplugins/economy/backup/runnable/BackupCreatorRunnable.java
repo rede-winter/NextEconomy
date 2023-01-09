@@ -3,7 +3,7 @@ package com.nextplugins.economy.backup.runnable;
 import com.google.common.base.Stopwatch;
 import com.nextplugins.economy.NextEconomy;
 import com.nextplugins.economy.backup.BackupManager;
-import com.nextplugins.economy.model.account.Account;
+import com.nextplugins.economy.model.Account;
 import com.nextplugins.economy.util.ColorUtil;
 import com.nextplugins.economy.util.SetSerializerHelper;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,6 @@ import java.util.Set;
  * @author Yuhtin
  * Github: https://github.com/Yuhtin
  */
-
 @RequiredArgsConstructor
 public final class BackupCreatorRunnable implements Runnable {
 
@@ -47,13 +46,11 @@ public final class BackupCreatorRunnable implements Runnable {
             logger.info("O backup '" + file.getName() + "' foi finalizado. (" + stopwatch + ")");
             backupManager.setBackuping(false);
 
-            if (sender != null) sender.sendMessage(ColorUtil.colored(
-                    "&aBackup '" + file.getName() + "' criado com sucesso!"
-            ));
+            if (sender != null)
+                sender.sendMessage(ColorUtil.colored("&aBackup '" + file.getName() + "' criado com sucesso!"));
         } catch (IOException exception) {
             exception.printStackTrace();
             logger.severe("Não foi possível escrever os dados no arquivo.");
         }
-
     }
 }

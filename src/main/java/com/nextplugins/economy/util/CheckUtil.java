@@ -21,7 +21,8 @@ public final class CheckUtil {
             lore.add(amount);
         }
 
-        val checkItem = new ItemBuilder(Material.valueOf(checkSection.getString("material")), checkSection.getInt("data"))
+        val checkItem = new ItemBuilder(
+                        Material.valueOf(checkSection.getString("material")), checkSection.getInt("data"))
                 .name(ColorUtil.colored(checkSection.getString("display-name")))
                 .setLore(lore)
                 .wrap();
@@ -31,5 +32,4 @@ public final class CheckUtil {
 
         return nbtItem.getItem();
     }
-
 }

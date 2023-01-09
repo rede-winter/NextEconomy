@@ -3,35 +3,26 @@ package com.nextplugins.economy.backup.runnable;
 import com.google.common.base.Stopwatch;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.nextplugins.economy.NextEconomy;
 import com.nextplugins.economy.backup.BackupManager;
 import com.nextplugins.economy.backup.response.ResponseType;
-import com.nextplugins.economy.convertor.ConvertorManager;
-import com.nextplugins.economy.model.account.Account;
 import com.nextplugins.economy.util.ColorUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.bukkit.command.CommandSender;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Yuhtin
  * Github: https://github.com/Yuhtin
  */
-
 @RequiredArgsConstructor
 public final class BackupReaderRunnable implements Runnable {
 
     private static final Gson PARSER = new GsonBuilder().setPrettyPrinting().create();
 
     private final CommandSender commandSender;
-    private final ConvertorManager convertorManager;
     private final BackupManager backupManager;
     private final boolean restauration;
     private final File file;
@@ -49,11 +40,7 @@ public final class BackupReaderRunnable implements Runnable {
 
                 logger.info("Criando um ponto de restauração para caso ocorra um erro.");
 
-                val response = backupManager.createBackup(
-                        null, null,
-                        accountRepository,
-                        true, true
-                );
+                val response = backupManager.createBackup(null, null, accountRepository, true, true);
 
                 if (response.getResponseType() == ResponseType.SUCCESS) {
                     restaurationFile = response.getFile();
@@ -76,25 +63,16 @@ public final class BackupReaderRunnable implements Runnable {
 
             val stopwatch = Stopwatch.createStarted();
 
-            val typeToken = new TypeToken<HashSet<Account>>() {}.getType();
-            Set<Account> accounts = PARSER.fromJson(new FileReader(this.file), typeToken);
-
-            convertorManager.startConversion(
-                    commandSender,
-                    accounts,
-                    "Lendo " + type,
-                    stopwatch
-            );
-
-            logger.info("A leitura do " + type + " '" + this.file.getName() + "' foi finalizada e os valores da tabela alterados. (" + stopwatch + ")");
+            logger.info("A leitura do " + type + " '" + this.file.getName()
+                    + "' foi finalizada e os valores da tabela alterados. (" + stopwatch + ")");
             backupManager.setBackuping(false);
 
-        } catch (IOException exception) {
+        } catch (Throwable t) {
             backupManager.setBackuping(false);
 
             Thread.currentThread().interrupt();
 
-            exception.printStackTrace();
+            t.printStackTrace();
             logger.severe("Não foi possível ler os dados do arquivo.");
 
             if (restaurationFile != null) {
@@ -102,6 +80,5 @@ public final class BackupReaderRunnable implements Runnable {
                 backupManager.loadBackup(commandSender, restaurationFile, true, true);
             }
         }
-
     }
 }

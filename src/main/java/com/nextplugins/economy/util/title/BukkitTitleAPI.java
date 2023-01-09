@@ -2,7 +2,6 @@ package com.nextplugins.economy.util.title;
 
 import com.nextplugins.economy.util.ColorUtil;
 import lombok.val;
-import lombok.var;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -27,5 +26,4 @@ class BukkitTitleAPI implements InternalTitleAPI {
     public List<Object> buildPackets(String message, int fadeIn, int stay, int fadeOut) {
         return null;
     }
-
 }

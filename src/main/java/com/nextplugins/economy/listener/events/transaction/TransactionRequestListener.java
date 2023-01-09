@@ -4,9 +4,9 @@ import com.nextplugins.economy.NextEconomy;
 import com.nextplugins.economy.api.event.transaction.TransactionRequestEvent;
 import com.nextplugins.economy.configuration.FeatureValue;
 import com.nextplugins.economy.configuration.MessageValue;
-import com.nextplugins.economy.model.account.storage.AccountStorage;
-import com.nextplugins.economy.model.account.transaction.Transaction;
-import com.nextplugins.economy.model.account.transaction.TransactionType;
+import com.nextplugins.economy.model.storage.AccountStorage;
+import com.nextplugins.economy.model.transaction.Transaction;
+import com.nextplugins.economy.model.transaction.TransactionType;
 import com.nextplugins.economy.util.NumberUtils;
 import lombok.val;
 import org.bukkit.event.EventHandler;
@@ -45,9 +45,8 @@ public final class TransactionRequestListener implements Listener {
 
         val minValue = FeatureValue.get(FeatureValue::minTransactionValue);
         if (amount < minValue) {
-            player.sendMessage(MessageValue.get(MessageValue::minValueNecessary)
-                    .replace("$amount", NumberUtils.format(minValue))
-            );
+            player.sendMessage(
+                    MessageValue.get(MessageValue::minValueNecessary).replace("$amount", NumberUtils.format(minValue)));
 
             event.setCancelled(true);
 
@@ -62,35 +61,29 @@ public final class TransactionRequestListener implements Listener {
             return;
         }
 
-        targetAccount.createTransaction(
-                Transaction.builder()
-                        .player(target.isOnline() ? target.getPlayer() : null)
-                        .owner(player.getName())
-                        .amount(event.getAmount())
-                        .transactionType(TransactionType.DEPOSIT)
-                        .build()
-        );
+        targetAccount.createTransaction(Transaction.builder()
+                .player(target.isOnline() ? target.getPlayer() : null)
+                .owner(player.getName())
+                .amount(event.getAmount())
+                .transactionType(TransactionType.DEPOSIT)
+                .build());
 
-        account.createTransaction(
-                Transaction.builder()
-                        .player(player)
-                        .owner(target.getName())
-                        .amount(event.getAmount())
-                        .transactionType(TransactionType.WITHDRAW)
-                        .build()
-        );
+        account.createTransaction(Transaction.builder()
+                .player(player)
+                .owner(target.getName())
+                .amount(event.getAmount())
+                .transactionType(TransactionType.WITHDRAW)
+                .build());
 
-        player.sendMessage(
-                MessageValue.get(MessageValue::paid).replace("$player", target.getName())
-                        .replace("$amount", NumberUtils.format(amount))
-        );
+        player.sendMessage(MessageValue.get(MessageValue::paid)
+                .replace("$player", target.getName())
+                .replace("$amount", NumberUtils.format(amount)));
 
         if (target.isOnline()) {
-            target.getPlayer().sendMessage(
-                    MessageValue.get(MessageValue::received).replace("$player", player.getName())
-                            .replace("$amount", NumberUtils.format(amount))
-            );
+            target.getPlayer()
+                    .sendMessage(MessageValue.get(MessageValue::received)
+                            .replace("$player", player.getName())
+                            .replace("$amount", NumberUtils.format(amount)));
         }
     }
-
 }

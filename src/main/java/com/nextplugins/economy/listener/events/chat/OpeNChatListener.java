@@ -1,6 +1,5 @@
 package com.nextplugins.economy.listener.events.chat;
 
-import com.nextplugins.economy.model.interactions.registry.InteractionRegistry;
 import com.nextplugins.economy.ranking.RankingStorage;
 import com.nextplugins.economy.util.ColorUtil;
 import com.nickuc.chat.api.events.PublicMessageEvent;
@@ -16,29 +15,19 @@ import org.bukkit.event.Listener;
 public final class OpeNChatListener implements Listener {
 
     private final RankingStorage rankingStorage;
-    private final InteractionRegistry interactionRegistry;
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChat(PublicMessageEvent event) {
         if (event.isCancelled()) return;
 
         val player = event.getSender();
-        if (interactionRegistry.getOperation().contains(player.getName())) {
-            interactionRegistry.getOperation().remove(player.getName());
-
-            event.setCancelled(true);
-            return;
-        }
-
         val textComponent = new TextComponent(rankingStorage.getTycoonTag(player.getName()));
         val hoverEvent = new HoverEvent(
                 HoverEvent.Action.SHOW_TEXT,
-                TextComponent.fromLegacyText(ColorUtil.colored("&7Um dos jogadores mais ricos."))
-        );
+                TextComponent.fromLegacyText(ColorUtil.colored("&7Um dos jogadores mais ricos.")));
 
         textComponent.setHoverEvent(hoverEvent);
 
         event.setTag("tycoon", textComponent);
     }
-
 }

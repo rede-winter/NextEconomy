@@ -4,8 +4,8 @@ messages:
     receiveCoinsOn: '&aativado'
     receiveCoinsOff: '&cdesativado'
   currency:
-    one: 'coin'
-    more: 'coins'
+    one: 'bala'
+    more: 'balas'
   requests:
     invalid-target: '&cO jogador solicitado não encontra-se online ou é inexistente.'
     invalid-money: '&cO dinheiro inserido não é válido.'
@@ -13,68 +13,6 @@ messages:
     link-error: ':x: Ocorreu um erro, você precisa vincular novamente sua conta.'
     link-discord: ':x: Você precisa ter uma conta vinculada a este discord para usar isto!'
     same: ':x: Você não pode enviar dinheiro para você mesmo.'
-  interaction:
-    cancelled: '&cOperação cancelada.'
-    invalid: "&cPara cancelar digite 'cancelar'."
-    input-player:
-      - ""
-      - "&aInsira o nome do jogador desejado"
-      - "&8Digite 'cancelar' para cancelar."
-      - ""
-    input-money:
-      - ""
-      - "&aInsira a quantia que deseja transferir"
-      - "&8Digite 'cancelar' para cancelar."
-      - ""
-    confirm:
-      - ""
-      - " &6&lTRANSFERÊNCIA"
-      - ""
-      - "  &fEnviando &e@money &fpara &e@player"
-      - "  &fVocê tem &e10 segundos &fpara cancelar."
-      - "  &fDigite '&ccancelar&f' para cancelar."
-      - ""
-  purse:
-    chatMessage: '&3&lBOLSA &fO valor atual da bolsa está em &b$value'
-    high-status: 'em alta'
-    down-status: 'em queda'
-    # Para o jogador não achar que perdeu/ganhou dinheiro do nada
-    # Quando ele gastar/ganhar dinheiro com a loja do servidor, ou com as maquinas/spawners dele (para qualquer sistema que de/retire dinheiro)
-    # Um exemplo é uma loja por placas do próprio jogador usando ChestShop
-    # Será enviada estas mensagens abaixo
-    changed-value:
-      add: # Quando ele receber algum valor
-        more: '&3&LBOLSA &fVocê recebeu mais &a$value &fnesta transação.' # Bolsa maior que 100% = aumento de preço = recebe mais em vendas
-        minus: '&3&LBOLSA &fVocê perdeu &a$value &fnesta transação.' # Bolsa menor que 100% = diminuição de preço = recebe menos em vendas
-      withdraw: # Quando ele gastar um valor
-        more: '&3&LBOLSA &fVocê gastou &a$value &fa mais nesta transação.' # Bolsa maior que 100% = aumento de preço = mais gasto para comprar algo
-        minus: '&3&LBOLSA &fVocê deixou de gastar &a$value &fnesta transação.' # Bolsa emnor que 100% = diminuição de preço = menos gasto para comprar algo
-    equals:
-      icon: '&b➫'
-      message: '&bManteve'
-    devalued:
-      icon: '&c➘'
-      message: '&cDesvalorizou'
-    valued:
-      icon: '&a➚'
-      message: '&aValorizou'
-    updated:
-      # Antes de mudar aqui, confira a lista de sons da versão do servidor
-      # 1.8x : https://helpch.at/docs/1.8.8/index.html?org/bukkit/Sound.html
-      # 1.12x: https://helpch.at/docs/1.12.2/org/bukkit/Sound.html
-      # 1.17.1: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
-      sound: NOTE_PLING
-      message:
-        - ''
-        - ' &2&lBOLSA DE VALORES'
-        - ''
-        - ' &7A Bolsa de valores sofreu'
-        - ' &7alterações $operationMessage'
-        - ''
-        - '   &a│ &fCotação anterior &8➟ &c$lastvalue'
-        - '   &a│ &fCotação Atual &8➟ &a$newvalue'
-        - '   &a│ &fPróxima Atualização em &710 Minutos'
-        - ''
   new-money-top:
     # Habilitar mensagem e título de top,
     # Altere para false caso queira desativar.
@@ -82,23 +20,23 @@ messages:
     # $player e $coins
     message:
       - ''
-      - '&2&l[$] &fO jogador &a$player &fé o novo &amagnata &fcom &a$$coins coins&f.'
+      - '&2&l[$] &fO jogador &a$player &fé o novo &amagnata &fcom &a$$coins balinhas&f.'
       - ''
     title: '&2&lMAGNATA<nl>&a$player &fé o novo &amagnata'
   receiveCoins:
     # Caso o jogador que esteja tentando enviar coins possua a permissão "nexteconomy.bypass",
     # poderá enviar moedas para o jogador mesmo que ele tenha desativado o recebimento do mesmo.
     toggleOff: '&cEste jogador está com o recebimento de moedas desativado.'
-    message: '&6&lBANCO &fVocê $toggleMessage &fo recebimento de moedas.'
+    message: '&aVocê $toggleMessage &ao recebimento de moedas.'
     enabled: '&a&lHABILITOU'
     disabled: '&c&lDESABILITOU'
   operations:
-    see: '&6&lBANCO &fVocê possui &e$amount&f de dinheiro.'
-    see-other: '&6&LBANCO &fO jogador &e$player&f possui&e $amount&f moedas.'
-    set: '&6&lBANCO &fVocê alterou o saldo de&e $player&f para&e $amount.'
-    add: '&6&lBANCO &fVocê adicionou&e $amount&f ao saldo de&e $player.'
-    remove: '&6&lBANCO &fVocê removeu&e $amount&f do saldo de&e $player.'
-    reset: '&6&lBANCO &fVocê zerou o saldo de&e $player.'
+    see: '&aVocê possui &f$amount&a de dinheiro.'
+    see-other: '&aO jogador &f$player&a possui&f $amount&a moedas.'
+    set: '&aVocê alterou o saldo de&f $player&a para&f $amount.'
+    add: '&aVocê adicionou&f $amount&a ao saldo de&f $player.'
+    remove: '&aVocê removeu&f $amount&a do saldo de&f $player.'
+    reset: '&aVocê zerou o saldo de&f $player.'
     discord:
       disabled: '&cEsta função está desabilitada.'
       sendMoneyRequest: ':bookmark_tabs: Confirme a transação de **$coins** para **$player** ($discord) digitando `$command`.'
@@ -108,8 +46,8 @@ messages:
   transactions:
     singular: 'transação'
     plural: 'transações'
-    paid: '&6&lBANCO &fVocê acabou de realizar uma transação.&7 ($amount&c ➡&f $player&7)'
-    received: '&6&lBANCO &fVocê acaba de receber uma transação.&7 (&f$player&2 ➡&f $amount&7)'
+    paid: '&aVocê acabou de realizar uma transação.&7 ($amount&c ➡&f $player&7)'
+    received: '&aVocê acaba de receber uma transação.&7 (&f$player&2 ➡&f $amount&7)'
     is-yourself: '&cVocê não pode fazer uma transação para si mesmo.'
     insufficient-amount: '&cVocê não tem dinheiro suficiente para completar esta transação.'
     min-value: '&cO valor mínimo necessário para realizar uma operação é de $amount.'
@@ -142,18 +80,13 @@ messages:
     no-permission: '&cVocê não tem permissão para utilizar este comando.'
     help-command:
       - ''
-      - '&a&lNextEconomy &8&l➡&f Ajuda'
+      - '&a&lEconomia &8&l➡&f Ajuda'
       - ''
-      - '&a/money &8- &7Abra o menu do banco.'
-      - '&a/money ver [jogador] &8- &7Veja o dinheiro de outra pessoa.'
-      - '&a/money enviar (jogador) (quantia) &8- &7Envie uma quantia de dinheiro para outra pessoa.'
-      - '&a/money top &8- &7Veja os jogadores com as maiores fortunas de dinheiro do servidor.'
-      - '&a/money toggle &8- &7Ative/Desative o recebimento de coins.'
-      - '&a/money vincular &8- &7Vincular sua conta com o discord'
-      - '&a/money desvincular &8- &7Desvincular sua conta do discord'
-      - '&a/money ajuda &8- &7Veja esta mensagem.'
-      - '&a/bolsa &8- &7Informações sobre a bolsa.'
-      - '&a/cheque &8- &7Informações sobre o cheque.'
+      - '&a/balas (jogador) &8- &7Abra o menu do banco.'
+      - '&a/balas enviar (jogador) (quantia) &8- &7Envie uma quantia de dinheiro para outra pessoa.'
+      - '&a/balas top &8- &7Veja os jogadores com as maiores fortunas de dinheiro do servidor.'
+      - '&a/balas toggle &8- &7Ative/Desative o recebimento de coins.'
+      - '&a/balas ajuda &8- &7Veja esta mensagem.'
       - ''
 
     # mensagem que será enviada se o player tiver a permissão: 'nexteconomy.command.help.staff'
@@ -161,23 +94,16 @@ messages:
       - ''
       - '&a&lNextEconomy &8&l➡&f Ajuda'
       - ''
-      - '&a/money &8- &7Abra o menu do banco.'
-      - '&a/money ver [jogador] &8- &7Veja o dinheiro de outra pessoa.'
-      - '&a/money enviar (jogador) (quantia) &8- &7Envie uma quantia de dinheiro para outra pessoa.'
-      - '&a/money toggle &8- &7Ative/Desative o recebimento de coins.'
-      - '&a/money vincular &8- &7Vincular sua conta com o discord.'
-      - '&a/money desvincular &8- &7Desvincular sua conta do discord'
-      - '&a/money top &8- &7Veja os jogadores com as maiores fortunas de dinheiro do servidor.'
-      - '&a/money ajuda &8- &7Veja esta mensagem.'
-      - '&a/bolsa &8- &7Sistema de bolsa.'
-      - '&a/cheque &8- &7Sistema de cheque.'
-      - '&a/money set (jogador) (quantia)&8 -&7 Sete uma quantia para alguém.'
-      - '&a/money add (jogador) (quantia)&8 -&7 Adicione uma quantia para alguém.'
-      - '&a/money remove (jogador) (quantia)&8 -&7 Remova uma quantia de alguém.'
-      - '&a/money reset (jogador)&8 -&7 Resete a conta do jogador.'
-      - '&a/money npc&8 -&7 Veja a ajuda para o sistema de NPC.'
-      - '&a/setbolsa (valor) &8- &7Altere o valor da bolsa.'
-      - '&a/bolsa give (player) (valor) &8- &7Adicione uma quantia a um jogador baseado na bolsa.'
+      - '&a/balas (jogador) &8- &7Abra o menu do banco.'
+      - '&a/balas enviar (jogador) (quantia) &8- &7Envie uma quantia de dinheiro para outra pessoa.'
+      - '&a/balas toggle &8- &7Ative/Desative o recebimento de coins.'
+      - '&a/balas top &8- &7Veja os jogadores com as maiores fortunas de dinheiro do servidor.'
+      - '&a/balas ajuda &8- &7Veja esta mensagem.'
+      - '&a/balas set (jogador) (quantia)&8 -&7 Sete uma quantia para alguém.'
+      - '&a/balas add (jogador) (quantia)&8 -&7 Adicione uma quantia para alguém.'
+      - '&a/balas remove (jogador) (quantia)&8 -&7 Remova uma quantia de alguém.'
+      - '&a/balas reset (jogador)&8 -&7 Resete a conta do jogador.'
+      - '&a/balas npc&8 -&7 Veja a ajuda para o sistema de NPC.'
       - ''
       - '&a/nexteconomy &8- &7Operações administrativas'
       - ''

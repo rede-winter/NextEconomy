@@ -27,8 +27,8 @@ ranking:
       - 'lp user $lastTycoon parent remove Tycoon'
 
   model:
-    # tipo do ranking, tipos válidos: 'CHAT' e 'INVENTORY'
-    type: 'INVENTORY' 
+    # tipo do ranking, tipos válidos: 'CHAT'
+    type: 'CHAT'
     chat:
       header:
         - ''
@@ -38,16 +38,6 @@ ranking:
       footer:
         - ''
         - ' &7Atualizado a cada 30 minutos.'
-        - ''
-    inventory:
-      title: 'Ranking de Jogadores (Coins)'
-      head-display-name-top: '&f$positionº, &7$tycoon$prefix$player$suffix'
-      head-display-name: '&f$positionº, &7$prefix$player$suffix'
-      head-lore:
-        - ''
-        - ' &7Quantia: &e$amount'
-        - ' &7Transações: &e$transactions'
-        - ' &7Dinheiro movimentado: &e$movimentation'
         - ''
   npc:
     enabled: true

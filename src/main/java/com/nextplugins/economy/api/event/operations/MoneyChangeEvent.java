@@ -1,7 +1,7 @@
 package com.nextplugins.economy.api.event.operations;
 
 import com.nextplugins.economy.api.event.EconomyEvent;
-import com.nextplugins.economy.model.account.Account;
+import com.nextplugins.economy.model.Account;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
  * @author Yuhtin
  * Github: https://github.com/Yuhtin
  */
-
 @Getter
 @Setter
 public final class MoneyChangeEvent extends EconomyEvent {

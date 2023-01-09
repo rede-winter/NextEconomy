@@ -1,6 +1,6 @@
 package com.nextplugins.economy.listener.events.user;
 
-import com.nextplugins.economy.model.account.storage.AccountStorage;
+import com.nextplugins.economy.model.storage.AccountStorage;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.bukkit.event.EventHandler;
@@ -17,9 +17,9 @@ public class UpdateNickListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         val account = accountStorage.findAccount(event.getPlayer());
-        if (account.getUuid() != null && !account.getUsername().equalsIgnoreCase(event.getPlayer().getName())) {
+        if (account.getUuid() != null
+                && !account.getUsername().equalsIgnoreCase(event.getPlayer().getName())) {
             account.setUsername(event.getPlayer().getName());
         }
     }
-
 }

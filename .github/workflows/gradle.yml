@@ -8,29 +8,29 @@
 # name: Java CI with Gradle
 
 # on:
-  # push:
-    # branches:
-      #- main
-      #- dev
-      # - disabled
+# push:
+# branches:
+#- main
+#- dev
+# - disabled
 
 # jobs:
-  # build:
+# build:
 
-    # runs-on: ubuntu-latest
+# runs-on: ubuntu-latest
 
-    # steps:
-    # - uses: actions/checkout@v3
-    # - uses: actions/setup-java@v3
-      # with:
-        # distribution: 'temurin'
-        # java-version: '11'
-        # cache: 'gradle'
-    # - name: Build with Gradle
-    # - run: ./gradlew build --no-daemon
-    # - name: Upload artifact
-      # uses: actions/upload-artifact@v3
-      # with:
-        # name: nexteconomy-production-builds
-        # path: build/libs/**
-        # if-no-files-found: error
+# steps:
+# - uses: actions/checkout@v3
+# - uses: actions/setup-java@v3
+# with:
+# distribution: 'temurin'
+# java-version: '11'
+# cache: 'gradle'
+# - name: Build with Gradle
+# - run: ./gradlew build --no-daemon
+# - name: Upload artifact
+# uses: actions/upload-artifact@v3
+# with:
+# name: nexteconomy-production-builds
+# path: build/libs/**
+# if-no-files-found: error

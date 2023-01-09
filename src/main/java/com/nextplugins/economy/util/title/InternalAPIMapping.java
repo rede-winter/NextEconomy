@@ -6,7 +6,6 @@ import lombok.val;
 
 @AllArgsConstructor
 public enum InternalAPIMapping {
-
     REFLECTION(ReflectionTitleAPI.class, MinecraftVersion.v1_12),
     BUKKIT(BukkitTitleAPI.class, MinecraftVersion.v1_18);
 

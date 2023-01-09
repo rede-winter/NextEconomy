@@ -21,23 +21,32 @@ import java.util.function.Function;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class FeatureValue implements ConfigurationInjectable {
 
-    @Getter private static final FeatureValue instance = new FeatureValue();
+    @Getter
+    private static final FeatureValue instance = new FeatureValue();
 
     // configuration
 
-    @ConfigField("autobackup") private boolean autoBackup;
+    @ConfigField("autobackup")
+    private boolean autoBackup;
 
-    @ConfigField("initial-balance") private double initialBalance;
-    @ConfigField("min-value") private double minTransactionValue;
+    @ConfigField("initial-balance")
+    private double initialBalance;
+
+    @ConfigField("min-value")
+    private double minTransactionValue;
 
     // check
 
-    @ConfigField("check.enable") private boolean checkSystemEnabled;
-    @ConfigField("check.min-value") private double checkMinimumValue;
-    @ConfigField("check.item") private ConfigurationSection checkItem;
+    @ConfigField("check.enable")
+    private boolean checkSystemEnabled;
+
+    @ConfigField("check.min-value")
+    private double checkMinimumValue;
+
+    @ConfigField("check.item")
+    private ConfigurationSection checkItem;
 
     public static <T> T get(Function<FeatureValue, T> function) {
         return function.apply(instance);
     }
-
 }

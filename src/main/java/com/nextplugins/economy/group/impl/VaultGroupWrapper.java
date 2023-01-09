@@ -51,20 +51,19 @@ public class VaultGroupWrapper implements GroupWrapper {
 
     private void setupPermission() {
 
-        RegisteredServiceProvider<Permission> permissionProvider = NextEconomy.getInstance().getServer().getServicesManager().getRegistration(Permission.class);
+        RegisteredServiceProvider<Permission> permissionProvider =
+                NextEconomy.getInstance().getServer().getServicesManager().getRegistration(Permission.class);
         if (permissionProvider == null) return;
 
         permissionApi = permissionProvider.getProvider();
-
     }
 
     private void setupChat() {
 
-        RegisteredServiceProvider<Chat> chatProvider = NextEconomy.getInstance().getServer().getServicesManager().getRegistration(Chat.class);
+        RegisteredServiceProvider<Chat> chatProvider =
+                NextEconomy.getInstance().getServer().getServicesManager().getRegistration(Chat.class);
         if (chatProvider == null) return;
 
         chatApi = chatProvider.getProvider();
-
     }
-
 }

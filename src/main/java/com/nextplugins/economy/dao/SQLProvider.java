@@ -57,5 +57,4 @@ public final class SQLProvider {
                 .database(section.getString("database"))
                 .build();
     }
-
 }

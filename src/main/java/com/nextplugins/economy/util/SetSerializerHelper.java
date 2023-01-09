@@ -30,5 +30,4 @@ public class SetSerializerHelper<T> {
     public void toJson(Set<T> data, FileWriter writer) {
         GSON.toJson(data, writer);
     }
-
 }

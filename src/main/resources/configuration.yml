@@ -32,34 +32,6 @@ plugin:
     # Se você utiliza MYSQL, utilize a função DROP na table nexteconomy_data
     nick-save-method: true
     # Sistema de bolsa de valores
-    stock-exchange:
-      # Habilitar o sistema de bolsa
-      # Para você usar a bolsa de valores, você precisa usar o comando
-      # /bolsa give <jogador> <valor> - Assim o valor usado será alterado pela bolsa de valores antes de ser enviado para o jogador
-      # o <jogador> <valor> devem ser trocados para a variável que o plugin que quer vincular pede
-      #
-      # Coloque para executar esse comando no plugin desejado, por exemplo de mineração.
-      # Caso não tenha opção de usar comando para dar o dinheiro no plugin que deseja, peça para
-      # o desenvolvedor do mesmo, disponibilizar um campo aonde você muda o comando a ser executado (ao invés de /money give use /bolsa give)
-      # Caso um plugin já tenha um campo para trocar o /money give troque por /bolsa give
-      # como citado logo acima!
-      enable: true
-      # Serve para desativar a mensagem de "BOLSA Você deixou de ganhar x ..."
-      # em algum mundo específico, podendo desativar na mineração
-      # para não ficar flodando
-      message-disabled-worlds:
-        - 'mina'
-      # Método que o jogador vai receber a mensagem "BOLSA Você deixou de ganhar x ..."
-      # ACTIONBAR - Aparecer na actionbar do usuário
-      # MESSAGE - Aparecer no chat do usuário
-      # NOTHING - Desabilitar a mensagem por completo
-      method: 'ACTIONBAR'
-      # Um valor maior que esse significa que a bolsa está em alta
-      average: 100
-      # Valor mínimo da bolsa
-      minValue: 75
-      # Valor máximo da bolsa
-      maxValue: 125
     # Valor inicial
     # Quando um jogador entra no servidor, começa com essa quantia
     initial-balance: 1500

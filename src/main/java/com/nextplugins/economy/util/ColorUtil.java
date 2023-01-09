@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ColorUtil {
 
-    @NotNull public static String colored(@Nullable String message) {
+    @NotNull
+    public static String colored(@Nullable String message) {
         if (message == null) return "";
         return ChatColor.translateAlternateColorCodes('&', message);
     }
@@ -28,9 +29,7 @@ public final class ColorUtil {
     }
 
     public static List<String> colored(List<String> description) {
-        return description.stream()
-                .map(ColorUtil::colored)
-                .collect(Collectors.toList());
+        return description.stream().map(ColorUtil::colored).collect(Collectors.toList());
     }
 
     public static java.awt.Color getColorByHex(String hex) {
@@ -41,5 +40,4 @@ public final class ColorUtil {
         val decode = getColorByHex(hex);
         return Color.fromRGB(decode.getRed(), decode.getGreen(), decode.getBlue());
     }
-
 }

@@ -6,7 +6,8 @@ import org.bukkit.event.HandlerList;
 
 public abstract class EconomyEvent extends Event {
 
-    @Getter private static final HandlerList handlerList = new HandlerList();
+    @Getter
+    private static final HandlerList handlerList = new HandlerList();
 
     public EconomyEvent(boolean isAsync) {
         super(isAsync);
@@ -16,5 +17,4 @@ public abstract class EconomyEvent extends Event {
     public HandlerList getHandlers() {
         return handlerList;
     }
-
 }

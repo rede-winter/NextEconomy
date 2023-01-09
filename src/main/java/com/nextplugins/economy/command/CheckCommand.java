@@ -2,9 +2,9 @@ package com.nextplugins.economy.command;
 
 import com.nextplugins.economy.configuration.FeatureValue;
 import com.nextplugins.economy.configuration.MessageValue;
-import com.nextplugins.economy.model.account.storage.AccountStorage;
-import com.nextplugins.economy.model.account.transaction.Transaction;
-import com.nextplugins.economy.model.account.transaction.TransactionType;
+import com.nextplugins.economy.model.storage.AccountStorage;
+import com.nextplugins.economy.model.transaction.Transaction;
+import com.nextplugins.economy.model.transaction.TransactionType;
 import com.nextplugins.economy.util.CheckUtil;
 import com.nextplugins.economy.util.NumberUtils;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +29,7 @@ public final class CheckCommand {
             aliases = {"cheque"},
             description = "Sistema de cheque.",
             permission = "nexteconomy.command.check",
-            async = true
-    )
+            async = true)
     public void checkCommand(Context<CommandSender> context) {
         val helpMessage = MessageValue.get(MessageValue::checkHelpCommand);
         helpMessage.forEach(context::sendMessage);
@@ -43,8 +42,7 @@ public final class CheckCommand {
             permission = "nexteconomy.command.check",
             usage = "/cheque criar (valor) [jogador]",
             target = CommandTarget.PLAYER,
-            async = true
-    )
+            async = true)
     public void createCheckCommand(Context<Player> context, String value, @Optional Player target) {
         val player = context.getSender();
         val amount = NumberUtils.parse(value);
@@ -52,9 +50,7 @@ public final class CheckCommand {
         val minValue = FeatureValue.get(FeatureValue::checkMinimumValue);
         if (amount < minValue) {
             player.sendMessage(
-                    MessageValue.get(MessageValue::checkMinimumValue)
-                            .replace("$amount", NumberUtils.format(minValue))
-            );
+                    MessageValue.get(MessageValue::checkMinimumValue).replace("$amount", NumberUtils.format(minValue)));
             return;
         }
 
@@ -64,36 +60,28 @@ public final class CheckCommand {
             return;
         }
 
-        val response = account.createTransaction(
-                Transaction.builder()
-                        .player(player)
-                        .owner("Cheque")
-                        .amount(amount)
-                        .amountWithoutPurse(0)
-                        .transactionType(TransactionType.WITHDRAW)
-                        .build()
-        );
+        val response = account.createTransaction(Transaction.builder()
+                .player(player)
+                .owner("Cheque")
+                .amount(amount)
+                .amountWithoutPurse(0)
+                .transactionType(TransactionType.WITHDRAW)
+                .build());
 
         if (!response.transactionSuccess()) {
             player.sendMessage(
-                    MessageValue.get(MessageValue::checkMinimumValue)
-                            .replace("$amount", NumberUtils.format(minValue))
-            );
+                    MessageValue.get(MessageValue::checkMinimumValue).replace("$amount", NumberUtils.format(minValue)));
             return;
         }
 
         player.sendMessage(
-                MessageValue.get(MessageValue::checkCreated)
-                        .replace("$checkValue", NumberUtils.format(amount))
-        );
+                MessageValue.get(MessageValue::checkCreated).replace("$checkValue", NumberUtils.format(amount)));
 
         val checkItem = CheckUtil.createCheck(amount);
         if (target != null) {
-            target.sendMessage(
-                    MessageValue.get(MessageValue::checkReceived)
-                            .replace("$checkValue", NumberUtils.format(amount))
-                            .replace("$sender", player.getName())
-            );
+            target.sendMessage(MessageValue.get(MessageValue::checkReceived)
+                    .replace("$checkValue", NumberUtils.format(amount))
+                    .replace("$sender", player.getName()));
 
             dropItem(target, target.getInventory().addItem(checkItem));
             return;
@@ -107,5 +95,4 @@ public final class CheckCommand {
             player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
         }
     }
-
 }

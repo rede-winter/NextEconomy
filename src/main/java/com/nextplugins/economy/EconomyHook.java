@@ -2,19 +2,19 @@ package com.nextplugins.economy;
 
 import com.nextplugins.economy.api.NextEconomyAPI;
 import com.nextplugins.economy.configuration.MessageValue;
-import com.nextplugins.economy.model.account.Account;
-import com.nextplugins.economy.model.account.storage.AccountStorage;
-import com.nextplugins.economy.model.account.transaction.Transaction;
-import com.nextplugins.economy.model.account.transaction.TransactionType;
+import com.nextplugins.economy.model.Account;
+import com.nextplugins.economy.model.storage.AccountStorage;
+import com.nextplugins.economy.model.transaction.Transaction;
+import com.nextplugins.economy.model.transaction.TransactionType;
 import com.nextplugins.economy.util.NumberUtils;
 import lombok.val;
-import lombok.var;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.OfflinePlayer;
 
 public class EconomyHook extends EconomyWrapper {
 
-    private static final AccountStorage ACCOUNT_STORAGE = NextEconomyAPI.getInstance().getAccountStorage();
+    private static final AccountStorage ACCOUNT_STORAGE =
+            NextEconomyAPI.getInstance().getAccountStorage();
 
     @Override
     public boolean isEnabled() {
@@ -75,21 +75,14 @@ public class EconomyHook extends EconomyWrapper {
 
         val account = ACCOUNT_STORAGE.findAccount(player);
         if (account != null) {
-            return account.createTransaction(
-                    Transaction.builder()
-                            .player(player.isOnline() ? player.getPlayer() : null)
-                            .amount(initialAmount)
-                            .transactionType(TransactionType.WITHDRAW)
-                            .build()
-            );
+            return account.createTransaction(Transaction.builder()
+                    .player(player.isOnline() ? player.getPlayer() : null)
+                    .amount(initialAmount)
+                    .transactionType(TransactionType.WITHDRAW)
+                    .build());
         }
 
-        return new EconomyResponse(
-                initialAmount,
-                0,
-                EconomyResponse.ResponseType.FAILURE,
-                "Conta inválida."
-        );
+        return new EconomyResponse(initialAmount, 0, EconomyResponse.ResponseType.FAILURE, "Conta inválida.");
     }
 
     @Override
@@ -100,21 +93,14 @@ public class EconomyHook extends EconomyWrapper {
 
         val account = ACCOUNT_STORAGE.findAccount(player);
         if (account != null) {
-            return account.createTransaction(
-                    Transaction.builder()
-                            .player(player.isOnline() ? player.getPlayer() : null)
-                            .amount(initialAmount)
-                            .transactionType(TransactionType.DEPOSIT)
-                            .build()
-            );
+            return account.createTransaction(Transaction.builder()
+                    .player(player.isOnline() ? player.getPlayer() : null)
+                    .amount(initialAmount)
+                    .transactionType(TransactionType.DEPOSIT)
+                    .build());
         }
 
-        return new EconomyResponse(
-                initialAmount,
-                0,
-                EconomyResponse.ResponseType.FAILURE,
-                "Conta inválida"
-        );
+        return new EconomyResponse(initialAmount, 0, EconomyResponse.ResponseType.FAILURE, "Conta inválida");
     }
 
     @Override
@@ -128,5 +114,4 @@ public class EconomyHook extends EconomyWrapper {
 
         return true;
     }
-
 }

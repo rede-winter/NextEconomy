@@ -21,48 +21,73 @@ import java.util.function.Function;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RankingValue implements ConfigurationInjectable {
 
-    @Getter private static final RankingValue instance = new RankingValue();
+    @Getter
+    private static final RankingValue instance = new RankingValue();
 
     // ranking
 
-    @ConfigField("update-delay") private int updateDelay;
-    @ConfigField("limit") private int rankingLimit;
+    @ConfigField("update-delay")
+    private int updateDelay;
+
+    @ConfigField("limit")
+    private int rankingLimit;
 
     // model
 
-    @ConfigField("model.type") private String rankingType;
+    @ConfigField("model.type")
+    private String rankingType;
 
     // chat model
 
-    @ConfigField("model.chat.header") private List<String> chatModelHeader;
-    @ConfigField("model.chat.body") private String chatModelBody;
-    @ConfigField("model.chat.footer") private List<String> chatModelFooter;
+    @ConfigField("model.chat.header")
+    private List<String> chatModelHeader;
+
+    @ConfigField("model.chat.body")
+    private String chatModelBody;
+
+    @ConfigField("model.chat.footer")
+    private List<String> chatModelFooter;
 
     // inventory model
 
-    @ConfigField("model.inventory.title") private String inventoryModelTitle;
-    @ConfigField("model.inventory.head-display-name-top") private String inventoryModelHeadDisplayNameTop;
-    @ConfigField("model.inventory.head-display-name") private String inventoryModelHeadDisplayName;
-    @ConfigField("model.inventory.head-lore") private List<String> inventoryModelHeadLore;
+    @ConfigField("model.inventory.title")
+    private String inventoryModelTitle;
+
+    @ConfigField("model.inventory.head-display-name-top")
+    private String inventoryModelHeadDisplayNameTop;
+
+    @ConfigField("model.inventory.head-display-name")
+    private String inventoryModelHeadDisplayName;
+
+    @ConfigField("model.inventory.head-lore")
+    private List<String> inventoryModelHeadLore;
 
     // npc
 
-    @ConfigField("npc.enable") private boolean npcEnabled;
-    @ConfigField("npc.format") private List<String> hologramFormat;
-    @ConfigField("npc.extra") private List<String> extraFormat;
+    @ConfigField("npc.format")
+    private List<String> hologramFormat;
+
+    @ConfigField("npc.extra")
+    private List<String> extraFormat;
 
     // tycoon
 
-    @ConfigField("tycoon.top.tag") private String tycoonTagValue;
-    @ConfigField("tycoon.top.discordRoleId") private long tycoonRoleId;
+    @ConfigField("tycoon.top.tag")
+    private String tycoonTagValue;
 
-    @ConfigField("tycoon.rich.tag") private String tycoonRichTagValue;
-    @ConfigField("tycoon.rich.discordRoleId") private long tycoonRichRoleId;
+    @ConfigField("tycoon.top.discordRoleId")
+    private long tycoonRoleId;
 
-    @ConfigField("tycoon.commands") private List<String> tycoonCommands;
+    @ConfigField("tycoon.rich.tag")
+    private String tycoonRichTagValue;
+
+    @ConfigField("tycoon.rich.discordRoleId")
+    private long tycoonRichRoleId;
+
+    @ConfigField("tycoon.commands")
+    private List<String> tycoonCommands;
 
     public static <T> T get(Function<RankingValue, T> function) {
         return function.apply(instance);
     }
-
 }
