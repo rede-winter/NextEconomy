@@ -1,10 +1,8 @@
 package com.nextplugins.economy.ranking;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.nextplugins.economy.NextEconomy;
 import com.nextplugins.economy.api.event.operations.AsyncMoneyTopPlayerChangedEvent;
-import com.nextplugins.economy.api.event.operations.AsyncRankingUpdateEvent;
 import com.nextplugins.economy.configuration.RankingValue;
 import com.nextplugins.economy.dao.repository.AccountRepository;
 import com.nextplugins.economy.group.Group;
@@ -17,7 +15,6 @@ import lombok.val;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
